@@ -11,10 +11,7 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.MachineTier;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.implementation.items.blocks.UnplaceableBlock;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.ItemUtils;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.skins.PlayerHead;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.skins.PlayerSkin;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
 import me.profelements.dynatech.DynaTech;
 import me.profelements.dynatech.blocks.CokeOvenController;
@@ -36,9 +33,7 @@ import me.profelements.dynatech.items.electric.machines.MineralizedApiary;
 import me.profelements.dynatech.items.electric.machines.Orechid;
 import me.profelements.dynatech.items.electric.generators.ChippingGenerator;
 import me.profelements.dynatech.items.electric.generators.CulinaryGenerator;
-import me.profelements.dynatech.items.electric.generators.DragonEggGenerator;
 import me.profelements.dynatech.items.electric.generators.EggMill;
-import me.profelements.dynatech.items.electric.generators.HydroGenerator;
 import me.profelements.dynatech.items.electric.generators.StardustReactor;
 import me.profelements.dynatech.items.electric.generators.WaterMill;
 import me.profelements.dynatech.items.electric.generators.WindMill;
@@ -76,17 +71,13 @@ import me.profelements.dynatech.registries.ItemGroups;
 import me.profelements.dynatech.registries.Items;
 import me.profelements.dynatech.registries.Recipes;
 import me.profelements.dynatech.registries.TypedKey;
-import me.profelements.dynatech.utils.ItemWrapper;
-import me.profelements.dynatech.utils.LiquidRegistry;
-import me.profelements.dynatech.utils.Recipe;
+import me.profelements.dynatech.utils.*;
 
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import dev.j3fftw.extrautils.utils.LoreBuilderDynamic;
 
 import javax.annotation.Nonnull;
 
@@ -175,23 +166,23 @@ public class DynaTechItemsSetup {
 
         if (DynaTech.isInfinityExpansionInstalled()) {
             new MobDataCard("Vex", MobDataTier.HOSTILE, new ItemStack[] {
-                    new SlimefunItemStack(Items.VEX_GEM.stack(), 16),
-                    new SlimefunItemStack(Items.GHOSTLY_ESSENCE.stack(), 16),
-                    new SlimefunItemStack(Items.VEX_GEM.stack(), 16),
-                    new SlimefunItemStack(Items.GHOSTLY_ESSENCE.stack(), 16), MobData.EMPTY_DATA_CARD,
-                    new SlimefunItemStack(Items.GHOSTLY_ESSENCE.stack(), 16),
-                    new SlimefunItemStack(Items.VEX_GEM.stack(), 16),
-                    new SlimefunItemStack(Items.GHOSTLY_ESSENCE.stack(), 16),
-                    new SlimefunItemStack(Items.VEX_GEM.stack(), 16)
+                    Utils.withAmount(Items.VEX_GEM.stack().item(), 16),
+                    Utils.withAmount(Items.GHOSTLY_ESSENCE.stack().item(), 16),
+                    Utils.withAmount(Items.VEX_GEM.stack().item(), 16),
+                    Utils.withAmount(Items.GHOSTLY_ESSENCE.stack().item(), 16), MobData.EMPTY_DATA_CARD.item().clone(),
+                    Utils.withAmount(Items.GHOSTLY_ESSENCE.stack().item(), 16),
+                    Utils.withAmount(Items.VEX_GEM.stack().item(), 16),
+                    Utils.withAmount(Items.GHOSTLY_ESSENCE.stack().item(), 16),
+                    Utils.withAmount(Items.VEX_GEM.stack().item(), 16)
             })
-                    .addDrop(Items.VEX_GEM.stack(), 1)
-                    .addDrop(Items.GHOSTLY_ESSENCE.stack(), 9)
+                    .addDrop(Items.VEX_GEM.stack().item().clone(), 1)
+                    .addDrop(Items.GHOSTLY_ESSENCE.stack().item().clone(), 9)
                     .register(plugin);
 
             new MobDataCard("Phantom", MobDataTier.HOSTILE, new ItemStack[] {
                     new ItemStack(Material.PHANTOM_MEMBRANE, 16), new ItemStack(Material.PHANTOM_MEMBRANE, 16),
                     new ItemStack(Material.PHANTOM_MEMBRANE, 16),
-                    new ItemStack(Material.PHANTOM_MEMBRANE, 16), MobData.EMPTY_DATA_CARD,
+                    new ItemStack(Material.PHANTOM_MEMBRANE, 16), MobData.EMPTY_DATA_CARD.item().clone(),
                     new ItemStack(Material.PHANTOM_MEMBRANE, 16),
                     new ItemStack(Material.PHANTOM_MEMBRANE, 16), new ItemStack(Material.PHANTOM_MEMBRANE, 16),
                     new ItemStack(Material.PHANTOM_MEMBRANE, 16),
@@ -228,12 +219,12 @@ public class DynaTechItemsSetup {
         new GrowthChamberEnd(ItemGroups.MACHINES, Items.GROWTH_CHAMBER_END.stack(),
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[] {
-                        SlimefunItems.HARDENED_GLASS, new ItemStack(Material.MAGENTA_STAINED_GLASS),
-                        SlimefunItems.HARDENED_GLASS,
+                        SlimefunItems.HARDENED_GLASS.item().clone(), new ItemStack(Material.MAGENTA_STAINED_GLASS),
+                        SlimefunItems.HARDENED_GLASS.item().clone(),
                         new ItemStack(Material.PURPUR_BLOCK), new ItemStack(Material.CHORUS_FLOWER),
                         new ItemStack(Material.END_STONE),
-                        Items.STAINLESS_STEEL_INGOT.stack(), Items.GROWTH_CHAMBER.stack(),
-                        Items.STAINLESS_STEEL_INGOT.stack()
+                        Items.STAINLESS_STEEL_INGOT.stack().item().clone(), Items.GROWTH_CHAMBER.stack().item().clone(),
+                        Items.STAINLESS_STEEL_INGOT.stack().item().clone()
                 })
                 .setCapacity(512)
                 .setConsumption(32)
@@ -329,10 +320,10 @@ public class DynaTechItemsSetup {
 
         new BandaidManager(ItemGroups.MACHINES, Items.BANDAID_MANAGER.stack(), RecipeType.MAGIC_WORKBENCH,
                 new ItemStack[] {
-                        SlimefunItems.BLANK_RUNE, Items.ANCIENT_MACHINE_CORE.stack(), SlimefunItems.BLANK_RUNE,
-                        SlimefunItems.REINFORCED_CLOTH, new ItemStack(Material.ENCHANTING_TABLE),
-                        SlimefunItems.REINFORCED_CLOTH,
-                        null, SlimefunItems.WITHER_PROOF_OBSIDIAN, null
+                        SlimefunItems.BLANK_RUNE.item().clone(), Items.ANCIENT_MACHINE_CORE.stack().item().clone(), SlimefunItems.BLANK_RUNE.item().clone(),
+                        SlimefunItems.REINFORCED_CLOTH.item().clone(), new ItemStack(Material.ENCHANTING_TABLE),
+                        SlimefunItems.REINFORCED_CLOTH.item().clone(),
+                        null, SlimefunItems.WITHER_PROOF_OBSIDIAN.item().clone(), null
                 })
                 .setCapacity(1024)
                 .setConsumption(48)
@@ -341,10 +332,10 @@ public class DynaTechItemsSetup {
 
         new Orechid(ItemGroups.MACHINES, Items.ORECHID.stack(), RecipeType.MAGIC_WORKBENCH,
                 new ItemStack[] {
-                        SlimefunItems.ENDER_RUNE, SlimefunItems.ENDER_RUNE, SlimefunItems.ENDER_RUNE,
-                        SlimefunItems.MAGIC_LUMP_3, new ItemStack(Material.WITHER_ROSE), SlimefunItems.MAGIC_LUMP_3,
-                        SlimefunItems.HARDENED_METAL_INGOT, SlimefunItems.REINFORCED_PLATE,
-                        SlimefunItems.HARDENED_METAL_INGOT
+                        SlimefunItems.ENDER_RUNE.item().clone(), SlimefunItems.ENDER_RUNE.item().clone(), SlimefunItems.ENDER_RUNE.item().clone(),
+                        SlimefunItems.MAGIC_LUMP_3.item().clone(), new ItemStack(Material.WITHER_ROSE), SlimefunItems.MAGIC_LUMP_3.item().clone(),
+                        SlimefunItems.HARDENED_METAL_INGOT.item().clone(), SlimefunItems.REINFORCED_PLATE.item().clone(),
+                        SlimefunItems.HARDENED_METAL_INGOT.item().clone()
                 })
                 .setCapacity(16384)
                 .setConsumption(1024)
@@ -355,38 +346,38 @@ public class DynaTechItemsSetup {
         new WirelessEnergyBank(ItemGroups.MACHINES, 10240, Items.WIRELESS_ENERGY_BANK.stack(),
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[] {
-                        Items.ADVANCED_MACHINE_SCRAP.stack(), Items.WIRELESS_CHARGER.stack(),
-                        Items.ADVANCED_MACHINE_SCRAP.stack(),
-                        Items.WIRELESS_CHARGER.stack(), SlimefunItems.BIG_CAPACITOR, Items.WIRELESS_CHARGER.stack(),
-                        Items.GHOSTLY_ESSENCE.stack(), Items.WIRELESS_CHARGER.stack(), Items.GHOSTLY_ESSENCE.stack()
+                        Items.ADVANCED_MACHINE_SCRAP.stack().item().clone(), Items.WIRELESS_CHARGER.stack().item().clone(),
+                        Items.ADVANCED_MACHINE_SCRAP.stack().item().clone(),
+                        Items.WIRELESS_CHARGER.stack().item().clone(), SlimefunItems.BIG_CAPACITOR.item().clone(), Items.WIRELESS_CHARGER.stack().item().clone(),
+                        Items.GHOSTLY_ESSENCE.stack().item().clone(), Items.WIRELESS_CHARGER.stack().item().clone(), Items.GHOSTLY_ESSENCE.stack().item().clone()
                 }).register(plugin);
 
         new WirelessEnergyPoint(ItemGroups.MACHINES, 5120, 1024, Items.WIRELESS_ENERGY_POINT.stack(),
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[] {
-                        SlimefunItems.ENERGY_CONNECTOR, Items.GHOSTLY_ESSENCE.stack(), SlimefunItems.ENERGY_CONNECTOR,
-                        Items.GHOSTLY_ESSENCE.stack(), Items.ANCIENT_MACHINE_CORE.stack(),
-                        Items.GHOSTLY_ESSENCE.stack(),
-                        SlimefunItems.ENERGY_CONNECTOR, Items.GHOSTLY_ESSENCE.stack(), SlimefunItems.ENERGY_CONNECTOR
+                        SlimefunItems.ENERGY_CONNECTOR.item().clone(), Items.GHOSTLY_ESSENCE.stack().item().clone(), SlimefunItems.ENERGY_CONNECTOR.item().clone(),
+                        Items.GHOSTLY_ESSENCE.stack().item().clone(), Items.ANCIENT_MACHINE_CORE.stack().item().clone(),
+                        Items.GHOSTLY_ESSENCE.stack().item().clone(),
+                        SlimefunItems.ENERGY_CONNECTOR.item().clone(), Items.GHOSTLY_ESSENCE.stack().item().clone(), SlimefunItems.ENERGY_CONNECTOR.item().clone()
                 }).register(plugin);
 
         new WirelessItemInput(ItemGroups.MACHINES, 1024, Items.WIRELESS_ITEM_INPUT.stack(),
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[] {
-                        SlimefunItems.CARGO_INPUT_NODE, Items.GHOSTLY_ESSENCE.stack(), SlimefunItems.CARGO_INPUT_NODE,
-                        Items.GHOSTLY_ESSENCE.stack(), Items.ANCIENT_MACHINE_CORE.stack(),
-                        Items.GHOSTLY_ESSENCE.stack(),
-                        SlimefunItems.CARGO_INPUT_NODE, Items.GHOSTLY_ESSENCE.stack(), SlimefunItems.CARGO_INPUT_NODE
+                        SlimefunItems.CARGO_INPUT_NODE.item().clone(), Items.GHOSTLY_ESSENCE.stack().item().clone(), SlimefunItems.CARGO_INPUT_NODE.item().clone(),
+                        Items.GHOSTLY_ESSENCE.stack().item().clone(), Items.ANCIENT_MACHINE_CORE.stack().item().clone(),
+                        Items.GHOSTLY_ESSENCE.stack().item().clone(),
+                        SlimefunItems.CARGO_INPUT_NODE.item().clone(), Items.GHOSTLY_ESSENCE.stack().item().clone(), SlimefunItems.CARGO_INPUT_NODE.item().clone()
                 }).register(plugin);
 
         new WirelessItemOutput(ItemGroups.MACHINES, 1024, Items.WIRELESS_ITEM_OUTPUT.stack(),
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[] {
-                        Items.ADVANCED_MACHINE_SCRAP.stack(), Items.GHOSTLY_ESSENCE.stack(),
-                        Items.ADVANCED_MACHINE_SCRAP.stack(),
-                        Items.GHOSTLY_ESSENCE.stack(), SlimefunItems.BIG_CAPACITOR, Items.GHOSTLY_ESSENCE.stack(),
-                        SlimefunItems.CARGO_OUTPUT_NODE_2, Items.GHOSTLY_ESSENCE.stack(),
-                        SlimefunItems.CARGO_OUTPUT_NODE_2
+                        Items.ADVANCED_MACHINE_SCRAP.stack().item().clone(), Items.GHOSTLY_ESSENCE.stack().item().clone(),
+                        Items.ADVANCED_MACHINE_SCRAP.stack().item().clone(),
+                        Items.GHOSTLY_ESSENCE.stack().item().clone(), SlimefunItems.BIG_CAPACITOR.item().clone(), Items.GHOSTLY_ESSENCE.stack().item().clone(),
+                        SlimefunItems.CARGO_OUTPUT_NODE_2.item().clone(), Items.GHOSTLY_ESSENCE.stack().item().clone(),
+                        SlimefunItems.CARGO_OUTPUT_NODE_2.item().clone()
                 }).register(plugin);
 
         new Tesseract(ItemGroups.MACHINES, 65535, 1024, Items.TESSERACT.stack(), Recipes.TESSERACT.getRecipeType(),
@@ -396,11 +387,11 @@ public class DynaTechItemsSetup {
         new FurnaceController(ItemGroups.MACHINES, Items.EXTERNAL_HEATER.stack(),
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[] {
-                        Items.STAINLESS_STEEL_INGOT.stack(), SlimefunItems.HARDENED_METAL_INGOT,
-                        Items.STAINLESS_STEEL_INGOT.stack(),
+                        Items.STAINLESS_STEEL_INGOT.stack().item().clone(), SlimefunItems.HARDENED_METAL_INGOT.item().clone(),
+                        Items.STAINLESS_STEEL_INGOT.stack().item().clone(),
                         new ItemStack(Material.OBSIDIAN), new ItemStack(Material.OBSERVER),
                         new ItemStack(Material.OBSIDIAN),
-                        new ItemStack(Material.OBSIDIAN), SlimefunItems.ENERGY_REGULATOR,
+                        new ItemStack(Material.OBSIDIAN), SlimefunItems.ENERGY_REGULATOR.item().clone(),
                         new ItemStack(Material.OBSIDIAN)
                 })
                 .setCapacity(2048)
@@ -415,23 +406,23 @@ public class DynaTechItemsSetup {
         // END Machines
         new LiquidTank(ItemGroups.TOOLS, Items.LIQUID_TANK.stack(), 16000, RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[] {
-                        Items.STAINLESS_STEEL_INGOT.stack(), new ItemStack(Material.BUCKET),
-                        Items.STAINLESS_STEEL_INGOT.stack(),
+                        Items.STAINLESS_STEEL_INGOT.stack().item().clone(), new ItemStack(Material.BUCKET),
+                        Items.STAINLESS_STEEL_INGOT.stack().item().clone(),
                         new ItemStack(Material.BUCKET), new ItemStack(Material.BUCKET), new ItemStack(Material.BUCKET),
-                        Items.STAINLESS_STEEL_INGOT.stack(), new ItemStack(Material.BUCKET),
-                        Items.STAINLESS_STEEL_INGOT.stack(),
+                        Items.STAINLESS_STEEL_INGOT.stack().item().clone(), new ItemStack(Material.BUCKET),
+                        Items.STAINLESS_STEEL_INGOT.stack().item().clone(),
                 }).register(plugin);
 
         // START Generators
         new ChippingGenerator(ItemGroups.GENERATORS, Items.DURABILITY_GENERATOR.stack(),
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[] {
-                        Items.STAINLESS_STEEL_INGOT.stack(), Items.STAINLESS_STEEL_INGOT.stack(),
-                        Items.STAINLESS_STEEL_INGOT.stack(),
-                        new ItemStack(Material.DIAMOND_AXE), Items.ANCIENT_MACHINE_CORE.stack(),
+                        Items.STAINLESS_STEEL_INGOT.stack().item().clone(), Items.STAINLESS_STEEL_INGOT.stack().item().clone(),
+                        Items.STAINLESS_STEEL_INGOT.stack().item().clone(),
+                        new ItemStack(Material.DIAMOND_AXE), Items.ANCIENT_MACHINE_CORE.stack().item().clone(),
                         new ItemStack(Material.DIAMOND_AXE),
-                        Items.STAINLESS_STEEL_INGOT.stack(), Items.STAINLESS_STEEL_INGOT.stack(),
-                        Items.STAINLESS_STEEL_INGOT.stack(),
+                        Items.STAINLESS_STEEL_INGOT.stack().item().clone(), Items.STAINLESS_STEEL_INGOT.stack().item().clone(),
+                        Items.STAINLESS_STEEL_INGOT.stack().item().clone(),
                 })
                 .setEnergyCapacity(256)
                 .setEnergyProduction(8)
@@ -441,9 +432,9 @@ public class DynaTechItemsSetup {
         new CulinaryGenerator(ItemGroups.GENERATORS, Items.FOOD_GENERATOR.stack(),
                 RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[] {
-                        SlimefunItems.ALUMINUM_BRASS_INGOT, SlimefunItems.ALUMINUM_BRASS_INGOT,
-                        SlimefunItems.ALUMINUM_BRASS_INGOT,
-                        SlimefunItems.LEAD_DUST, SlimefunItems.SMALL_CAPACITOR, SlimefunItems.LEAD_DUST,
+                        SlimefunItems.ALUMINUM_BRASS_INGOT.item().clone(), SlimefunItems.ALUMINUM_BRASS_INGOT.item().clone(),
+                        SlimefunItems.ALUMINUM_BRASS_INGOT.item().clone(),
+                        SlimefunItems.LEAD_DUST.item().clone(), SlimefunItems.SMALL_CAPACITOR.item().clone(), SlimefunItems.LEAD_DUST.item().clone(),
                         new ItemStack(Material.CAMPFIRE), new ItemStack(Material.CAMPFIRE),
                         new ItemStack(Material.CAMPFIRE)
                 })
@@ -456,9 +447,9 @@ public class DynaTechItemsSetup {
                 new ItemStack[] {
                         new ItemStack(Material.FIRE_CHARGE), new ItemStack(Material.FIRE_CHARGE),
                         new ItemStack(Material.FIRE_CHARGE),
-                        null, SlimefunItems.NUCLEAR_REACTOR, null,
-                        Items.ADVANCED_MACHINE_SCRAP.stack(), Items.ANCIENT_MACHINE_CORE.stack(),
-                        Items.ADVANCED_MACHINE_SCRAP.stack()
+                        null, SlimefunItems.NUCLEAR_REACTOR.item().clone(), null,
+                        Items.ADVANCED_MACHINE_SCRAP.stack().item().clone(), Items.ANCIENT_MACHINE_CORE.stack().item().clone(),
+                        Items.ADVANCED_MACHINE_SCRAP.stack().item().clone()
                 })
                 .setEnergyCapacity(32676)
                 .setEnergyProduction(1024)
@@ -645,11 +636,11 @@ public class DynaTechItemsSetup {
                         .setKey(APIARY_KEY.key())
                         .setRecipeType(RecipeType.ENHANCED_CRAFTING_TABLE)
                         .setInput(new ItemStack[] {
-                                SlimefunItems.LARGE_CAPACITOR, item.getItem(), SlimefunItems.LARGE_CAPACITOR,
-                                item.getItem(), Items.MATERIAL_HIVE.stack(), item.getItem(),
-                                Items.MACHINE_SCRAP.stack(), Items.VEX_GEM.stack(), Items.MACHINE_SCRAP.stack(),
+                                SlimefunItems.LARGE_CAPACITOR.item().clone(), item.getItem(), SlimefunItems.LARGE_CAPACITOR.item().clone(),
+                                item.getItem(), Items.MATERIAL_HIVE.stack().item().clone(), item.getItem(),
+                                Items.MACHINE_SCRAP.stack().item().clone(), Items.VEX_GEM.stack().item().clone(), Items.MACHINE_SCRAP.stack().item().clone(),
                         })
-                        .setOutput(APIARY.stack())
+                        .setOutput(APIARY.stack().item().clone())
                         .register();
 
                 new MineralizedApiary(ItemGroups.HIVES, APIARY.stack(), APIARY_RECIPE.getRecipeType(),
@@ -681,11 +672,11 @@ public class DynaTechItemsSetup {
                     .setKey(APIARY_KEY.key())
                     .setRecipeType(RecipeType.ENHANCED_CRAFTING_TABLE)
                     .setInput(new ItemStack[] {
-                            SlimefunItems.LARGE_CAPACITOR, item, SlimefunItems.LARGE_CAPACITOR,
-                            item, Items.MATERIAL_HIVE.stack(), item,
-                            Items.MACHINE_SCRAP.stack(), Items.VEX_GEM.stack(), Items.MACHINE_SCRAP.stack(),
+                            SlimefunItems.LARGE_CAPACITOR.item().clone(), item, SlimefunItems.LARGE_CAPACITOR.item().clone(),
+                            item, Items.MATERIAL_HIVE.stack().item().clone(), item,
+                            Items.MACHINE_SCRAP.stack().item().clone(), Items.VEX_GEM.stack().item().clone(), Items.MACHINE_SCRAP.stack().item().clone(),
                     })
-                    .setOutput(APIARY.stack())
+                    .setOutput(APIARY.stack().item().clone())
                     .register();
 
             new MineralizedApiary(ItemGroups.HIVES, APIARY.stack(), APIARY_RECIPE.getRecipeType(),

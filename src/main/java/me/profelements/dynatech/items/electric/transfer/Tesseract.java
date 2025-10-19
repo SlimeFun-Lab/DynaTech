@@ -1,6 +1,6 @@
 package me.profelements.dynatech.items.electric.transfer;
 
-import io.github.bakedlibs.dough.blocks.BlockPosition;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.blocks.BlockPosition;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemHandler;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
@@ -220,7 +220,7 @@ public class Tesseract extends SlimefunItem implements EnergyNetProvider {
         preset.drawBackground(ChestMenuUtils.getInputSlotTexture(), getInputBorder());
         preset.drawBackground(ChestMenuUtils.getOutputSlotTexture(), getOutputBorder());
         preset.addItem(
-                4, new CustomItemStack(Material.PURPLE_STAINED_GLASS_PANE, "&fKnowledge Pane",
+                4, CustomItemStack.create(Material.PURPLE_STAINED_GLASS_PANE, "&fKnowledge Pane",
                         "&fCurrent Power: Unknown", "&fCurrent Status: NOT CONNECTED"),
                 ChestMenuUtils.getEmptyClickHandler());
     }

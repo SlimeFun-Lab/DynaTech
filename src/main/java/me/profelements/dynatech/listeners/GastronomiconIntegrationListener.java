@@ -1,12 +1,13 @@
 package me.profelements.dynatech.listeners;
 
+import io.github.schntgaispock.gastronomicon.core.slimefun.items.food.GastroFood;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
-import io.github.bakedlibs.dough.collections.Pair;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import io.github.schntgaispock.gastronomicon.api.items.FoodItemStack;
 import io.github.schntgaispock.gastronomicon.core.slimefun.recipes.GastroRecipeType;
 import io.github.schntgaispock.gastronomicon.util.item.HeadTextures;
@@ -33,10 +34,12 @@ public class GastronomiconIntegrationListener implements Listener {
 
         if (item1 instanceof CulinaryGenerator cg && item2 instanceof SeedPlucker sp && gastronomiconInstalled) {
             for (SlimefunItem item : Slimefun.getRegistry().getEnabledSlimefunItems()) {
-                if (item.getItem() instanceof FoodItemStack food && !food.getTexture().equals(HeadTextures.NONE)
-                        && !item.getId().contains("GN_PERFECT")) {
-                    cg.registerFuel(food, food.getHunger() * 4);
-                    PicnicBasket.registerFood(food, new Pair<>(food.getHunger(), (float) food.getSaturation()));
+                if (item instanceof GastroFood gf) {
+                    final FoodItemStack food = gf.getFoodItem();
+                    if (!food.getTexture().equals(HeadTextures.NONE) && !gf.getId().contains("GN_PERFECT")) {
+                        cg.registerFuel(food.item().clone(), food.getHunger() * 4);
+                        PicnicBasket.registerFood(food.item().clone(), new Pair<>(food.getHunger(), (float) food.getSaturation()));
+                    }
                 }
 
                 if (item.getRecipeType() == GastroRecipeType.HARVEST) {

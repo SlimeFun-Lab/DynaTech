@@ -14,7 +14,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import io.github.bakedlibs.dough.inventory.InvUtils;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.inventory.InvUtils;
 import io.github.thebusybiscuit.slimefun4.api.events.AsyncMachineOperationFinishEvent;
 import io.github.thebusybiscuit.slimefun4.implementation.operations.CraftingOperation;
 import io.github.thebusybiscuit.slimefun4.libraries.paperlib.PaperLib;
@@ -105,11 +105,11 @@ public class UpgradesListener implements Listener {
         String upgrades = BlockStorage.getLocationInfo(l, "upgrades");
 
         if (upgrades != null && upgrades.contains("auto_output")) {
-            l.getWorld().dropItemNaturally(l, Items.AUTO_OUTPUT_UPGRADE.stack());
+            l.getWorld().dropItemNaturally(l, Items.AUTO_OUTPUT_UPGRADE.stack().item().clone());
         }
 
         if (upgrades != null && upgrades.contains("auto_input")) {
-            l.getWorld().dropItemNaturally(l, Items.AUTO_INPUT_UPGRADE.stack());
+            l.getWorld().dropItemNaturally(l, Items.AUTO_INPUT_UPGRADE.stack().item().clone());
         }
     }
 
